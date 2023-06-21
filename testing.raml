@@ -1,0 +1,62 @@
+#%RAML 1.0
+title: Simple API
+version: 1.0
+baseUri: http://localhost:8000/api
+
+types:
+  User:
+    properties:
+      id: number
+      name: string
+      email: string
+
+/users:
+  get:
+    description: Retrieve all users
+    responses:
+      200:
+        body:
+          application/json:
+            type: User[]
+  post:
+    description: Create a new user
+    body:
+      application/json:
+        type: User
+    responses:
+      201:
+        description: User created successfully
+        body:
+          application/json:
+            type: User
+
+/users/{id}:
+  get:
+    description: Retrieve a specific user by ID
+    responses:
+      200:
+        body:
+          application/json:
+            type: User
+      404:
+        description: User not found
+  put:
+    description: Update a specific user by ID
+    body:
+      application/json:
+        type: User
+    responses:
+      200:
+        description: User updated successfully
+        body:
+          application/json:
+            type: User
+      404:
+        description: User not found
+  delete:
+    description: Delete a specific user by ID
+    responses:
+      204:
+        description: User deleted successfully
+      404:
+        description: User not found
